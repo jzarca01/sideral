@@ -1,7 +1,7 @@
 import Entity from "src/Entity";
-import Entity from "src/Animation";
+// import Animation from "src/Animation";
 
-export default class EntityMachineGun extends Entity {
+export default class MachineGun extends Entity {
 
   constructor (player, scene) {
 
