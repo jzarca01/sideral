@@ -17,6 +17,17 @@ export default class Player extends Sprite {
         this.addAnimation("WALK_DOWN", 1, [0,1,2,3,4,5,6,7,8], 10);
         this.addAnimation("WALK_UP", 1, [0,1,2,3,4,5,6,7,8], 12);
 
-
     }
+  
+    /**
+     * @override
+     */
+    initialize () {
+        this.reactivity.
+            when("x", "y").change(this._containerPosition).
+            when("width", "height").change(this._containerSize);
+
+        super.initialize();
+    }
+
 }

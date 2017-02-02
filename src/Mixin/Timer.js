@@ -137,5 +137,5 @@ export default class Timer extends Component {
 Timer.toMs = (frame) => {
   "use strict";
 
-  return frame / State.game.currentFps;
+  return frame / State.game.fps;
 };

@@ -64,7 +64,7 @@ export default class Sprite extends Entity {
     }
 
     addAnimation (name, delay, tiles, lineOfTexture) {
-        if (!image) {
+        if (!tiles) {
             throw new Error("Sprite.addAnimation", "no texture provided.");
         }
 
