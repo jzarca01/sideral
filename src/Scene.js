@@ -43,4 +43,24 @@ export default class Scene extends Component {
     }
 
     /* METHODS */
+    update () {
+	    super.update();
+
+        if (Engine.keyboard.isPressed(Engine.keyboard.KEY.LEFT_ARROW)) {
+            this.player.animation = this.player.animations.WALK_LEFT;
+        }
+
+        if (Engine.keyboard.isPressed(Engine.keyboard.KEY.RIGHT_ARROW)) {
+            this.player.animation = this.player.animations.WALK_RIGHT;
+        }
+
+        if (Engine.keyboard.isPressed(Engine.keyboard.KEY.UP_ARROW)) {
+            this.player.animation = this.player.animations.WALK_UP;
+        }
+
+        if (Engine.keyboard.isPressed(Engine.keyboard.KEY.DOWN_ARROW)) {
+            this.player.animation = this.player.animations.WALK_DOWN;
+        }
+
+    }
 }

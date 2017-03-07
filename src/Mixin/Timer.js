@@ -4,12 +4,10 @@
 
 
 import Mixin from './../Mixin';
-import State from './../State';
 
-
-export default class Timer extends Component {
+export default class Timer extends Mixin {
   /* LIFECYCLE */
-  constructor (duration, options = {})
+  constructor ()
   {
     super();
 
@@ -18,31 +16,6 @@ export default class Timer extends Component {
      * @type {string}
      */
     this.name = 'timer';
-
-    /**
-     * Duration of the timer
-     */
-    this.duration = duration;
-
-    /**
-     * Number of time the timer must reset after complete
-     */
-    this.recurrence = options.recurrence;
-
-    /**
-     * If reversible, the timer will go to it's initial value after complete
-     */
-    this.reversible = options.reversible;
-
-    /**
-     * Event fired when initialized
-     */
-    this.eventInit = options.initialize;
-
-    /**
-     * Event fired when completed
-     */
-    this.eventComplete = options.complete;
 
     /**
      * Tendance value (used with reversible)
@@ -63,10 +36,6 @@ export default class Timer extends Component {
      * Setted to true if the timer is complete
      */
     this.finished = false;
-
-    if (this.eventInit) {
-      this.eventInit();
-    }
   }
 
   /**
@@ -100,6 +69,43 @@ export default class Timer extends Component {
 
 
   /* METHODS */
+
+  setTimer(duration, options)
+  {
+    /**
+     * Duration of the timer
+     */
+    this.duration = duration;
+
+    /**
+     * Number of time the timer must reset after complete, -1 is infinite
+     */
+    this.recurrence = options.recurrence || 0;
+
+    /**
+     * If reversible, the timer will go to it's initial value after complete
+     */
+    this.reversible = options.reversible || false;
+
+    /**
+     * Event fired when initialized
+     */
+    this.eventInit = options.initialize;
+
+    /**
+     * Event fired when completed
+     */
+    this.eventComplete = options.complete;
+
+    if(this.eventInit) {
+      this.eventInit();
+    }
+
+    if(duration) {
+      this.value = duration;
+    }
+
+  }
   /**
    * Get value with ration (0 to 1)
    * @returns {number}
@@ -116,6 +122,7 @@ export default class Timer extends Component {
   stop (bypassComplete)
   {
     if (this.eventComplete && !bypassComplete) {
+        console.log("duration over");
         this.eventComplete();
     }
 
@@ -133,9 +140,3 @@ export default class Timer extends Component {
     this.finished = false;
   }
 }
-
-Timer.toMs = (frame) => {
-  "use strict";
-
-  return frame / State.game.fps;
-};
